@@ -19,7 +19,7 @@ public class Problemas {
             System.out.println("[2] Problema 2");
             System.out.println("[5] Problema 5");
             System.out.println("[7] Problema 7");
-            System.out.println("[10] Problema 23");
+            System.out.println("[10] Problema 17");
             System.out.println("Selecciona el problema: ");
 
             seleccionPrograma = k.nextInt();
@@ -30,7 +30,7 @@ public class Problemas {
                     Calculadora();
                     break;
                 case 2:
-                    Problema2();
+                    //Problema2();
                     break;
                 case 5:
                     Problema5();
@@ -51,9 +51,11 @@ public class Problemas {
 
             // Pregunta si continuar el programa
             try {
-                System.out.println("¿Quieres seguir con el programa? [s/n] (s=si, n=no)");
+                System.out.println("¿Quieres continuar al menú principal? [s/n] (s=si, n=no)");
                 seleccionWhile = k.next().toLowerCase().charAt(0);
                 continuarPrograma = (seleccionWhile == 's') ? true : false;
+                limpiarConsola();
+                
             } catch (Exception e) {
                 System.out.println("Debes ingresar solo números (0-1)");
                 break;
@@ -65,26 +67,10 @@ public class Problemas {
 
 
     static void Calculadora(){
-        /*
-        Desarrolla una calculadora la cual habrá de hacer el cálculo de la suma, división, multiplicación y
-        exponenciación a N cantidad para una N cantidad de números que el usuario desee. Puntos: 1 */
- 
-        // Declaracion de variables
-        int asdasda; // Variable para guardar el resultado
-        int variable2; // Variable para contador
-        int asd3; // Variable para no sé que
-        
-        System.out.println("Hola desde Calculadora");
+        Calculadora calc = new Calculadora();
+        calc.menuCalculadora();
     }
 
-    static void Problema2(){
-
-        System.out.println("Hola desde Problema2");
-
-
-
-        // TODO: Desarrolla el problema 2
-    }
 
     static void Problema17() {
         Scanner k = new Scanner(System.in);
@@ -92,41 +78,67 @@ public class Problemas {
 
         /*
          * 17. Se necesita generar un vector de 50 elementos con valores numéricos enteros (imprima el
-            vector lleno, el usuario no lo llena), realice lo siguiente:
-            a. Leer un valor x y buscar en qué posición del vector se encuentra
-            b. Llene otro vector con los elementos de las posiciones impares del vector.
-            c. En este último vector, busque cuántos elementos son múltiplos de 3 Puntos: 1
+         * vector lleno, el usuario no lo llena), realice lo siguiente:
+         * a. Leer un valor x y buscar en qué posición del vector se encuentra
+         * b. Llene otro vector con los elementos de las posiciones impares del vector.
+         * c. En este último vector, busque cuántos elementos son múltiplos de 3 Puntos: 1
          */
 
-        // Declaracion de variables
+        // Declaración de variables
         int vector[] = new int[50];
         int numX; // Número a buscar en el vector
-        int posX; // Posición del número a buscar en el vector
+        int posX = -1; // Posición del número a buscar en el vector, inicializada a -1
 
-        
-        
-        // Llenar vector con numeros enteros aleatorios entre 1-100
+        // Llenar vector con números enteros aleatorios entre 1-100
         // Mostrar el vector lleno
         for (int i = 0; i < vector.length; i++) {
-            vector[i] = rnd.nextInt(1, 100);
+            vector[i] = rnd.nextInt(100) + 1; // valores entre 1 y 100
             System.out.println("Posición " + i + ": " + vector[i]);
         }
 
         System.out.println("Ingresa el número a buscar en el vector de 50 números:");
         numX = k.nextInt();
-        
+
         // Buscar el número en el vector
         for (int i = 0; i < vector.length; i++) {
             if (vector[i] == numX) {
                 posX = i;
-                System.out.println("El número " + numX + " se encuentra en la posición " + posX);
                 break;
             }
         }
+        if (posX != -1) {
+            System.out.println("El número " + numX + " se encuentra en la posición " + posX);
+        } else {
+            System.out.println("El número " + numX + " no se encuentra en el vector");
+        }
 
         // Llenar otro vector con los elementos de las posiciones impares del vector
+        int vectorImpares[] = new int[25];
+        int j = 0;
+        for (int i = 1; i < vector.length; i += 2) {
+            vectorImpares[j] = vector[i];
+            j++;
+        }
 
+        // Mostrar el vector con los elementos de las posiciones impares
+        System.out.println("Vector con elementos en posiciones impares:");
+        System.out.print("[");
+        for (int i = 0; i < vectorImpares.length; i++) {
+            System.out.print("" + vectorImpares[i] + ", ");
+        }
+        System.out.println("]");
+
+        // Buscar cuántos elementos son múltiplos de 3
+        int multiplos3 = 0;
+        for (int i = 0; i < vectorImpares.length; i++) {
+            if (vectorImpares[i] % 3 == 0) {
+                multiplos3++;
+            }
+        }
+
+        System.out.println("En el vector de posiciones impares hay " + multiplos3 + " elementos múltiplos de 3");
     }
+
     static void Problema5(){
         Scanner k = new Scanner(System.in);
         // 5. Implementa la función exponencial: Taylor
@@ -179,6 +191,13 @@ public class Problemas {
         System.out.println("El monto de la inversion en 2024 es: " + "$" + r);
     }
 
+    public static void limpiarConsola() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+    } 
+
 }
+
+
 
 
