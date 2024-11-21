@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,6 +17,8 @@ public class Problemas {
             System.out.println("Lista de problemas.");
             System.out.println("[1] Calculadora");
             System.out.println("[2] Problema 2");
+            System.out.println("[5] Problema 5");
+            System.out.println("[7] Problema 7");
             System.out.println("[10] Problema 23");
             System.out.println("Selecciona el problema: ");
 
@@ -28,6 +31,12 @@ public class Problemas {
                     break;
                 case 2:
                     Problema2();
+                    break;
+                case 5:
+                    Problema5();
+                    break;
+                case 7:
+                    Problema7();
                     break;
                 case 10:
                     Problema17();
@@ -117,6 +126,57 @@ public class Problemas {
 
         // Llenar otro vector con los elementos de las posiciones impares del vector
 
+    }
+    static void Problema5(){
+        Scanner k = new Scanner(System.in);
+        // 5. Implementa la función exponencial: Taylor
+        
+        // Declarar variables
+        int x; // valor x de la formula
+        int n; // Número de terminos de la sucesión
+        double resultado; // Variable para guardar el resultado
+        double t = 1.0; // El primer termino es 1
+        double suma = 1.0; // Variable para ir sumando los valores de la serie
+
+        // Pedir valores al usuario
+        System.out.println("Ingrese el valor de x: ");
+        x = k.nextInt();
+
+        System.out.println("Ingrese el número de terminos de la serie de Taylor: ");
+        n = k.nextInt();
+
+        // Ciclo para realizar la serie
+        for (int i = 1; i < n; i++) {
+            t = t * x / i; // calcular termino de la sucesion
+            suma += t; // Añade los terminos de la sucesion y los suma
+        }
+        resultado = suma;
+        
+        // Imprimir el resultado de la serie
+        System.out.println("El valor aproximaodo de e^" + x + " es: " + resultado);
+        
+    }
+    static void Problema7(){
+        /* 7. En 1951, una persona vendió las tierras de su abuelo al gobierno por la cantidad de $1500.
+        Suponga que esta persona ha colocado el dinero en una cuenta de ahorros que paga 15% anual.
+        ¿Cuánto vale ahora su inversión? P(1+i)^n. */
+        
+        // Declarar variables
+        BigDecimal r; // Es el monto final
+        BigDecimal p = new BigDecimal("1500"); // Cantidad inicial de dinero
+        BigDecimal i = new BigDecimal("0.15"); // tasa de interés anual
+        int n = 2024 - 1951; // cantidad de años
+
+        // Para realizar la suma del parentesis
+        BigDecimal uno = new BigDecimal("1");
+        
+        // realizar calculo
+        r = uno.add(i); // realizar la operación que está dentro del parentesis: (1 + i) = (1 + 0.15)
+        r = r.pow(n); // Realizar exponente: (1.15)^73
+        r = p.multiply(r); // realizar la multiplicación en este caso: 1500 * 26973.81
+
+        // Imprimir resultado
+        System.out.println("El monto de la inversion en 2024 es: " + "$" + r);
     }
 
 }
