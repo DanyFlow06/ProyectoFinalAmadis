@@ -1,10 +1,13 @@
 import java.util.Scanner;
 
 public class Calculadora {
+    // Despliegue de menú de calculadora
     public void menuCalculadora() {
         Scanner scanner = new Scanner(System.in);
-        boolean continuar = true;
+        boolean continuar = true; // Variable para controlar el ciclo del menú  
 
+
+        // Ciclo para mostrar el menú de la calculadora
         while (continuar) {
             try {
                 System.out.println("Menú de calculadora");
@@ -16,6 +19,7 @@ public class Calculadora {
                 System.out.println("Elige una operación:");
                 int opcion = scanner.nextInt();
 
+                // Validacion para salir del menú
                 if (opcion == 5) {
                     continuar = false;
                     System.out.println("Saliendo...");

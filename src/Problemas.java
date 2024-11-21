@@ -17,9 +17,9 @@ public class Problemas {
             System.out.println("Lista de problemas.");
             System.out.println("[1] Calculadora");
             System.out.println("[2] Problema 2");
-            System.out.println("[5] Problema 5");
-            System.out.println("[7] Problema 7");
-            System.out.println("[10] Problema 17");
+            System.out.println("[5] Funcion exponencial: Taylor");
+            System.out.println("[7] Valor de inversion de 1951 a 2024");
+            System.out.println("[10] Vector de 50 elementos enteros");
             System.out.println("Selecciona el problema: ");
 
             seleccionPrograma = k.nextInt();
@@ -83,6 +83,20 @@ public class Problemas {
          * b. Llene otro vector con los elementos de las posiciones impares del vector.
          * c. En este último vector, busque cuántos elementos son múltiplos de 3 Puntos: 1
          */
+        limpiarConsola();
+
+         System.out.println("Problema 17: Vector de 50 elementos enteros");
+         System.out.println("Este programa hará lo siguiente: ");
+         System.out.println("a. Leer un valor x y buscar en qué posición del vector se encuentra\r\n" + //
+                          "b. Llene otro vector con los elementos de las posiciones impares del vector.\r\n" + //
+                          "c. En este último vector, busque cuántos elementos son múltiplos de 3");
+
+        // Sleep 2s
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // Declaración de variables
         int vector[] = new int[50];
