@@ -16,8 +16,11 @@ public class Problemas {
             
             System.out.println("Lista de problemas.");
             System.out.println("[1] Calculadora");
-            System.out.println("[2] Problema 2");
+            System.out.println("[2] Letras del abecedario");
+            System.out.println("[3] Histograma de datos");
+            System.out.println("[4] Intercambiar posiciones de un arreglo");
             System.out.println("[5] Funcion exponencial: Taylor");
+            System.out.println("[6] Invertir un arreglo de n elementos");
             System.out.println("[7] Valor de inversion de 1951 a 2024");
             System.out.println("[10] Vector de 50 elementos enteros");
             System.out.println("Selecciona el problema: ");
@@ -27,19 +30,28 @@ public class Problemas {
             switch (seleccionPrograma) {
                 case 1:
                     // Ejecutar calculadora programa N1
-                    Calculadora();
+                    Calculadora(); // 1 pto
                     break;
                 case 2:
-                    //Problema2();
+                    Problema10(); // 1 pto
+                    break;
+                case 3:
+                    Problema11(); // 1 pto
+                    break;
+                case 4:
+                    Problema12(); // 1 pto
                     break;
                 case 5:
-                    Problema5();
+                    Problema5(); // 2 ptos
+                    break;
+                case 6:
+                    Problema13(); // 2 ptos
                     break;
                 case 7:
-                    Problema7();
+                    Problema7(); // 1 pto
                     break;
                 case 10:
-                    Problema17();
+                    Problema17(); // 1 pto
                     break;        
 
                 // TODOS LOS CASOS ABAJO ->
@@ -66,12 +78,131 @@ public class Problemas {
     }
 
 
+    // Metodo para ejecutar el programa de la calculadora
     static void Calculadora(){
         Calculadora calc = new Calculadora();
         calc.menuCalculadora();
     }
+    
+    // Metodo para llenar un arreglo con las letras del abecedario (26 letras) abecedario en ingles para evitar la ñ
+    static void Problema10(){
+        /* 
+         * Crea un arreglo de caracteres en el cual coloque cada una de las letras del abecedario, lo que
+        hará el algoritmo, es solicitar al usuario N cantidad de números entre el 1 y el 27 (habrás de
+        validar que el numero este en ese rango) e imprimir las letras correspondientes por número
+        aceptado. Puntos: 1
+         */
 
+        Scanner k = new Scanner(System.in);
+        int num; // Número a buscar en el arreglo
+        char[] abc = new char[27]; // Arreglo de 27 elementos para las letras del abecedario
+        System.out.println("Ingresa un número entre 1 y 26: "); 
+        num = k.nextInt(); // Leer número del usuario
+        // Validar que el número esté en el rango 1-26
+        if (num < 1 || num > 26) {
+            System.out.println("Número fuera de rango, debe ser entre 1-26");
+            return;
+        }else{
+            // Llenar el arreglo con las letras del abecedario
+            for (int i = 0; i < abc.length; i++) {
+                abc[i] = (char) (i + 65);
+            }
+            // Mostrar la letra correspondiente al número ingresado
+            System.out.println("La letra correspondiente al número " + num + " es: " + abc[num - 1]);
+        }
+    }
 
+    // Metodo para llamar al programa de histograma de datos aumentando los asteriscos
+    static void Problema11(){
+        /*
+         * Realice un algoritmo que permita introducir un arreglo de n elementos, el programa mostrara
+            un histograma de esos datos (el histograma se interpretara con la salida de n asteriscos donde n
+            es el valor de cada elemento del arreglo) ej: el arreglo es 2,3,4 el histograma será 2->**3->***4-
+            >**** Puntos: 1
+         */
+
+        Scanner k = new Scanner(System.in);
+        int nNumeros; // Número de elementos a introducir en el arreglo
+        System.out.println("Ingresa el número de elementos a introducir en el arreglo: ");
+        nNumeros = k.nextInt(); // Leer número de y del usuario
+
+        int[] numeros = new int[nNumeros]; // Declarar arreglo de n elementos
+
+        // Leer los n elementos del usuario
+        for (int i = 0; i < nNumeros; i++) {
+            System.out.println("Ingresa el número " + (i + 1) + ": ");
+            numeros[i] = k.nextInt();
+        }
+
+        // Mostrar el histograma de los n elementos
+        for (int i = 0; i < nNumeros; i++) {
+            System.out.print(numeros[i] + "->");
+            for (int j = 0; j < numeros[i]; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    // Metodo para llamar al programa de invertir un arreglo de n elementos
+    static void Problema12(){
+        /*
+         * 12. Se requiere un algoritmo que lea un vector de 8 elementos e intercambie las posiciones de sus
+        elementos, de tal forma que el primer elemento pase a ser el último y el último el primero, el
+        segundo el penúltimo y así sucesivamente, e imprima ese vector. Puntos: 1
+         */
+
+        Scanner k = new Scanner(System.in);
+        int nNumeros; // Número de elementos a introducir en el arreglo
+        System.out.println("Ingresa el número de elementos a introducir en el arreglo: ");
+        nNumeros = k.nextInt(); // Leer número de elementos del usuario
+
+        int[] numeros = new int[nNumeros]; // Declarar arreglo de n elementos
+
+        // Leer los n elementos del usuario
+        for (int i = 0; i < nNumeros; i++) {
+            System.out.println("Ingresa el número " + (i + 1) + ": ");
+            numeros[i] = k.nextInt();
+        }
+
+        // Intercambiar las posiciones de los elementos
+        for (int i = 0; i < nNumeros / 2; i++) {
+            int temp = numeros[i];
+            numeros[i] = numeros[nNumeros - 1 - i];
+            numeros[nNumeros - 1 - i] = temp;
+        }
+
+        // Mostrar el vector con las posiciones intercambiadas
+        System.out.println("Vector con posiciones intercambiadas:");
+        for (int i = 0; i < nNumeros; i++) {
+            System.out.println(numeros[i]);
+        }
+    }
+
+    // Metodo para llamar al programa de mostrar en orden inverso a como fueron introducidos
+    static void Problema13(){
+        /*
+         * 13. Elabora un algoritmo que permita introducir n elementos de tipo entero en un arreglo, el
+        programa mostrara impreso el arreglo en orden inverso a como fueron introducidos. Puntos: 2
+         */
+        Scanner k = new Scanner(System.in);
+        int nNumeros; // Número de elementos a introducir en el arreglo
+        System.out.println("Ingresa el número de elementos a introducir en el arreglo: ");
+        nNumeros = k.nextInt(); // Leer número de elementos del usuario
+        int[] numeros = new int[nNumeros]; // Declarar arreglo de n elementos
+        // Leer los n elementos del usuario
+        for (int i = 0; i < nNumeros; i++) {
+            System.out.println("Ingresa el número " + (i + 1) + ": ");
+            numeros[i] = k.nextInt();
+        }
+        // Mostrar los n elementos en orden inverso
+        System.out.println("Elementos en orden inverso: ");
+        for (int i = nNumeros - 1; i >= 0; i--) {
+            System.out.println(numeros[i]);
+        }
+    }
+
+    // Metodo para llamar al programa de vector de 50 elementos enteros
     static void Problema17() {
         Scanner k = new Scanner(System.in);
         Random rnd = new Random();
@@ -153,6 +284,7 @@ public class Problemas {
         System.out.println("En el vector de posiciones impares hay " + multiplos3 + " elementos múltiplos de 3");
     }
 
+    // Metodo para llamar al programa de la función exponencial de Taylor
     static void Problema5(){
         Scanner k = new Scanner(System.in);
         // 5. Implementa la función exponencial: Taylor
@@ -182,6 +314,8 @@ public class Problemas {
         System.out.println("El valor aproximaodo de e^" + x + " es: " + resultado);
         
     }
+    
+    // Metodo para llamar al programa de la inversión de 1951 a 2024
     static void Problema7(){
         /* 7. En 1951, una persona vendió las tierras de su abuelo al gobierno por la cantidad de $1500.
         Suponga que esta persona ha colocado el dinero en una cuenta de ahorros que paga 15% anual.
@@ -205,8 +339,9 @@ public class Problemas {
         System.out.println("El monto de la inversion en 2024 es: " + "$" + r);
     }
 
+    // Metodo para limpiar la consola
     public static void limpiarConsola() {  
-        System.out.print("\033[H\033[2J");  
+        System.out.print("\033[H\033[2J"); 
         System.out.flush();  
     } 
 
