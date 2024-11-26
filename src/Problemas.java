@@ -1,4 +1,3 @@
-import java.math.BigDecimal;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -42,15 +41,19 @@ public class Problemas {
                     Problema11(); // 1 pto
                     break;
                 case 4:
+                    System.out.println("\nIngresa 8 digitos y el programa los va a intercambiar\nde lugar (Ejemplo:| 1 | 2 | 3 | = | 3 | 2 | 1 | )\n");
                     Problema12(); // 1 pto
                     break;
                 case 5:
+                    System.out.println("\nEste algoritmo implementa la función exponencial de Taylor del tamaño que desee\n");
                     Problema5(); // 2 ptos
                     break;
                 case 6:
+                    System.out.println("\nInvertir un arreglo de n elementos le pertmite ingresar la cantidad de números que\ndesee e invertirlos en orden\n");
                     Problema13(); // 2 ptos
                     break;
                 case 7:
+                    System.out.println("\nEn este algoritmo se calcula cuanto tiene actualmente (2024) una persona que en 1951\ntenía $1500 en una cuenta de ahorro con una tasa anual del 15%.\n");
                     Problema7(); // 1 pto
                     break;
                 case 8:
@@ -156,30 +159,28 @@ public class Problemas {
          */
 
         Scanner k = new Scanner(System.in);
-        int nNumeros; // Número de elementos a introducir en el arreglo
-        System.out.println("Ingresa el número de elementos a introducir en el arreglo: ");
-        nNumeros = k.nextInt(); // Leer número de elementos del usuario
 
-        int[] numeros = new int[nNumeros]; // Declarar arreglo de n elementos
+        int[] numeros = new int[8]; // Declarar arreglo de n elementos
 
         // Leer los n elementos del usuario
-        for (int i = 0; i < nNumeros; i++) {
+        for (int i = 0; i < 8; i++) {
             System.out.println("Ingresa el número " + (i + 1) + ": ");
             numeros[i] = k.nextInt();
         }
 
         // Intercambiar las posiciones de los elementos
-        for (int i = 0; i < nNumeros / 2; i++) {
+        for (int i = 0; i < 8 / 2; i++) {
             int temp = numeros[i];
-            numeros[i] = numeros[nNumeros - 1 - i];
-            numeros[nNumeros - 1 - i] = temp;
+            numeros[i] = numeros[8 - 1 - i];
+            numeros[8 - 1 - i] = temp;
         }
 
         // Mostrar el vector con las posiciones intercambiadas
         System.out.println("Vector con posiciones intercambiadas:");
-        for (int i = 0; i < nNumeros; i++) {
-            System.out.println(numeros[i]);
+        for (int i = 0; i < 8; i++) {
+            System.out.print(numeros[i] + " | ");
         }
+        System.out.println();
     }
 
     // Metodo para llamar al programa de mostrar en orden inverso a como fueron introducidos
@@ -325,21 +326,18 @@ public class Problemas {
         ¿Cuánto vale ahora su inversión? P(1+i)^n. */
         
         // Declarar variables
-        BigDecimal r; // Es el monto final
-        BigDecimal p = new BigDecimal("1500"); // Cantidad inicial de dinero
-        BigDecimal i = new BigDecimal("0.15"); // tasa de interés anual
+        double r; // Es el monto final
+        double p = 1500; // Cantidad inicial de dinero
+        double i = 0.15; // tasa de interés anual
         int n = 2024 - 1951; // cantidad de años
 
-        // Para realizar la suma del parentesis
-        BigDecimal uno = new BigDecimal("1");
-        
         // realizar calculo
-        r = uno.add(i); // realizar la operación que está dentro del parentesis: (1 + i) = (1 + 0.15)
-        r = r.pow(n); // Realizar exponente: (1.15)^73
-        r = p.multiply(r); // realizar la multiplicación en este caso: 1500 * 26973.81
+        r = 1 + i; // realizar la operación que está dentro del parentesis: (1 + i) = (1 + 0.15)
+        r = Math.pow(r, n); // Realizar exponente: (1.15)^73
+        r = p * r; // realizar la multiplicación en este caso: 1500 * 26973.81
 
         // Imprimir resultado
-        System.out.println("El monto de la inversion en 2024 es: " + "$" + r);
+        System.out.printf("El monto de la inversion en 2024 es: $%.2f\n", r);
     }
 
     // Metodo para limpiar la consola
