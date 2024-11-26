@@ -22,7 +22,7 @@ public class Problemas {
             System.out.println("[5] Funcion exponencial: Taylor");
             System.out.println("[6] Invertir un arreglo de n elementos");
             System.out.println("[7] Valor de inversion de 1951 a 2024");
-            System.out.println("[10] Vector de 50 elementos enteros");
+            System.out.println("[8] Vector de 50 elementos enteros");
             System.out.println("Selecciona el problema: ");
 
             seleccionPrograma = k.nextInt();
@@ -30,12 +30,15 @@ public class Problemas {
             switch (seleccionPrograma) {
                 case 1:
                     // Ejecutar calculadora programa N1
+                    System.out.println("\nCalculadora permite realizar sumas, división, multiplicación y\nexponienciación de los números que desee.\n");
                     Calculadora(); // 1 pto
                     break;
                 case 2:
+                    System.out.println("\nEn letras del abecedario usted ingresará un número entre el 1 - 26\ny se imprimirá la letra correspondiente (Ejemplo: 3 = C)\n");
                     Problema10(); // 1 pto
                     break;
                 case 3:
+                    System.out.println("\nHistograma de datos permite introducir n cantidad de elementos, el\nprograma mostrara un histograma de esos datos (el histograma se\ninterpretara con la salida de n asteriscos donde n es el valor\nde cada elemento del arreglo) ej: el arreglo es 2,3,4 el\nhistograma será 2->**3->***4->****\n");                        
                     Problema11(); // 1 pto
                     break;
                 case 4:
@@ -50,7 +53,7 @@ public class Problemas {
                 case 7:
                     Problema7(); // 1 pto
                     break;
-                case 10:
+                case 8:
                     Problema17(); // 1 pto
                     break;        
 
