@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,22 +10,24 @@ public class Problemas {
 
         boolean continuarPrograma = true;
         char seleccionWhile;
-        int seleccionPrograma;
+        
         while (continuarPrograma) {
-            System.out.println("Bienvenido a nuestro programa");
-            
-            System.out.println("Lista de problemas.");
-            System.out.println("[1] Calculadora");
-            System.out.println("[2] Letras del abecedario");
-            System.out.println("[3] Histograma de datos");
-            System.out.println("[4] Intercambiar posiciones de un arreglo");
-            System.out.println("[5] Funcion exponencial: Taylor");
-            System.out.println("[6] Invertir un arreglo de n elementos");
-            System.out.println("[7] Valor de inversion de 1951 a 2024");
-            System.out.println("[8] Vector de 50 elementos enteros");
-            System.out.println("Selecciona el problema: ");
 
-            seleccionPrograma = k.nextInt();
+            mainMenu();
+
+            int seleccionPrograma = 0;
+            boolean validInput = false;
+            while (!validInput) {
+                try {
+                    seleccionPrograma = k.nextInt();
+                    validInput = true;
+                } catch (Exception e) {
+                    limpiarConsola();
+                    mainMenu();
+                    System.out.println("Ingresaste un valor no válido, intenta de nuevo: ");
+                    k.next(); // Limpiar el buffer del scanner
+                }
+            }
 
             switch (seleccionPrograma) {
                 case 1:
@@ -83,11 +86,26 @@ public class Problemas {
         
     }
 
+    static void mainMenu(){
+        System.out.println("Bienvenido a nuestro programa");
+            
+            System.out.println("Lista de problemas.");
+            System.out.println("[1] Calculadora");
+            System.out.println("[2] Letras del abecedario");
+            System.out.println("[3] Histograma de datos");
+            System.out.println("[4] Intercambiar posiciones de un arreglo");
+            System.out.println("[5] Funcion exponencial: Taylor");
+            System.out.println("[6] Invertir un arreglo de n elementos");
+            System.out.println("[7] Valor de inversion de 1951 a 2024");
+            System.out.println("[8] Vector de 50 elementos enteros");
+            System.out.println("Selecciona el problema: ");
+    }
+
 
     // Metodo para ejecutar el programa de la calculadora
     static void Calculadora(){
-        Calculadora calc = new Calculadora();
-        calc.menuCalculadora();
+        Calculadora calc = new Calculadora(); // Instanciar la clase Calculadora para acceder a sus métodos
+        calc.menuCalculadora(); // Llamar al método menuCalculadora para mostrar el menú
     }
     
     // Metodo para llenar un arreglo con las letras del abecedario (26 letras) abecedario en ingles para evitar la ñ
@@ -100,22 +118,34 @@ public class Problemas {
          */
 
         Scanner k = new Scanner(System.in);
-        int num; // Número a buscar en el arreglo
+        int num = 0; // Número a buscar en el arreglo
         char[] abc = new char[27]; // Arreglo de 27 elementos para las letras del abecedario
-        System.out.println("Ingresa un número entre 1 y 26: "); 
-        num = k.nextInt(); // Leer número del usuario
-        // Validar que el número esté en el rango 1-26
-        if (num < 1 || num > 26) {
-            System.out.println("Número fuera de rango, debe ser entre 1-26");
-            return;
-        }else{
-            // Llenar el arreglo con las letras del abecedario
-            for (int i = 0; i < abc.length; i++) {
-                abc[i] = (char) (i + 65);
-            }
-            // Mostrar la letra correspondiente al número ingresado
-            System.out.println("La letra correspondiente al número " + num + " es: " + abc[num - 1]);
+
+        // Llenar el arreglo con las letras del abecedario
+        for (int i = 0; i < abc.length; i++) {
+            abc[i] = (char) (i + 65);
         }
+
+        boolean validInput = false;
+        while(!validInput){
+            System.out.println("Ingresa un número entre 1 y 26: "); 
+            try {
+                num = k.nextInt(); // Leer número del usuario
+                // Validar que el número esté en el rango 1-26
+                if(num >= 1 && num <= 26){
+                    validInput = true;
+                }else{
+                    System.out.println("Número fuera de rango, debe ser entre 1-26");
+                }
+            } catch (Exception e) {
+                System.out.println("La entrada no es válida, debe ser un número entero");
+                k.next(); // Limpiar el buffer del scanner
+            }
+        }
+        
+        // Mostrar la letra correspondiente al número ingresado
+        System.out.println("La letra correspondiente al número " + num + " es: " + abc[num - 1]);
+        
     }
 
     // Metodo para llamar al programa de histograma de datos aumentando los asteriscos
@@ -128,9 +158,20 @@ public class Problemas {
          */
 
         Scanner k = new Scanner(System.in);
-        int nNumeros; // Número de elementos a introducir en el arreglo
+        int nNumeros = 0; // Número de elementos a introducir en el arreglo
         System.out.println("Ingresa el número de elementos a introducir en el arreglo: ");
-        nNumeros = k.nextInt(); // Leer número de y del usuario
+        
+        while (nNumeros <= 0) { // Validar que el número de elementos sea mayor a 0 y sea un número entero
+            try {
+                nNumeros = k.nextInt(); // Leer número de elementos del usuario
+                if (nNumeros <= 0) {
+                    System.out.println("El número de elementos debe ser mayor a 0");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Debes ingresar un número entero");
+                k.next(); // Limpiar el buffer del scanner
+            }
+        }
 
         int[] numeros = new int[nNumeros]; // Declarar arreglo de n elementos
 
@@ -151,30 +192,39 @@ public class Problemas {
     }
 
     // Metodo para llamar al programa de invertir un arreglo de n elementos
-    static void Problema12(){
+    static void Problema12() {
         /*
          * 12. Se requiere un algoritmo que lea un vector de 8 elementos e intercambie las posiciones de sus
         elementos, de tal forma que el primer elemento pase a ser el último y el último el primero, el
         segundo el penúltimo y así sucesivamente, e imprima ese vector. Puntos: 1
          */
-
+    
         Scanner k = new Scanner(System.in);
-
-        int[] numeros = new int[8]; // Declarar arreglo de n elementos
-
-        // Leer los n elementos del usuario
+    
+        int[] numeros = new int[8]; // Declarar arreglo de 8 elementos
+    
+        // Leer los 8 elementos del usuario
         for (int i = 0; i < 8; i++) {
-            System.out.println("Ingresa el número " + (i + 1) + ": ");
-            numeros[i] = k.nextInt();
+            boolean validInput = false;
+            while (!validInput) {
+                System.out.println("Ingresa el número " + (i + 1) + ": ");
+                try {
+                    numeros[i] = k.nextInt();
+                    validInput = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida. Por favor, ingresa un número entero.");
+                    k.next(); // Limpiar el buffer del scanner
+                }
+            }
         }
-
+    
         // Intercambiar las posiciones de los elementos
         for (int i = 0; i < 8 / 2; i++) {
             int temp = numeros[i];
             numeros[i] = numeros[8 - 1 - i];
             numeros[8 - 1 - i] = temp;
         }
-
+    
         // Mostrar el vector con las posiciones intercambiadas
         System.out.println("Vector con posiciones intercambiadas:");
         for (int i = 0; i < 8; i++) {
@@ -190,20 +240,36 @@ public class Problemas {
         programa mostrara impreso el arreglo en orden inverso a como fueron introducidos. Puntos: 2
          */
         Scanner k = new Scanner(System.in);
-        int nNumeros; // Número de elementos a introducir en el arreglo
+        int nNumeros = 0; // Número de elementos a introducir en el arreglo
+
         System.out.println("Ingresa el número de elementos a introducir en el arreglo: ");
-        nNumeros = k.nextInt(); // Leer número de elementos del usuario
+        
+        while (nNumeros <= 0) { // Validar que el número de elementos sea mayor a 0 y sea un número entero
+            try {
+                nNumeros = k.nextInt(); // Leer número de elementos del usuario
+                if (nNumeros <= 0) {
+                    System.out.println("El número de elementos debe ser mayor a 0");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Debes ingresar un número entero");
+                k.next(); // Limpiar el buffer del scanner
+            }
+        }
+
         int[] numeros = new int[nNumeros]; // Declarar arreglo de n elementos
+
         // Leer los n elementos del usuario
         for (int i = 0; i < nNumeros; i++) {
             System.out.println("Ingresa el número " + (i + 1) + ": ");
             numeros[i] = k.nextInt();
         }
+
         // Mostrar los n elementos en orden inverso
         System.out.println("Elementos en orden inverso: ");
         for (int i = nNumeros - 1; i >= 0; i--) {
-            System.out.println(numeros[i]);
+            System.out.print(numeros[i] +" ");
         }
+        System.out.println();
     }
 
     // Metodo para llamar al programa de vector de 50 elementos enteros
@@ -235,7 +301,7 @@ public class Problemas {
 
         // Declaración de variables
         int vector[] = new int[50];
-        int numX; // Número a buscar en el vector
+        int numX = 0; // Número a buscar en el vector
         int posX = -1; // Posición del número a buscar en el vector, inicializada a -1
 
         // Llenar vector con números enteros aleatorios entre 1-100
@@ -246,7 +312,17 @@ public class Problemas {
         }
 
         System.out.println("Ingresa el número a buscar en el vector de 50 números:");
-        numX = k.nextInt();
+        
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                numX = k.nextInt();
+                validInput = true;
+            } catch (Exception e) {
+                System.out.println("Debes ingresar un número entero");
+                k.next(); // Limpiar el buffer del scanner
+            }
+        }
 
         // Buscar el número en el vector
         for (int i = 0; i < vector.length; i++) {
@@ -294,18 +370,28 @@ public class Problemas {
         // 5. Implementa la función exponencial: Taylor
         
         // Declarar variables
-        int x; // valor x de la formula
-        int n; // Número de terminos de la sucesión
+        
         double resultado; // Variable para guardar el resultado
         double t = 1.0; // El primer termino es 1
         double suma = 1.0; // Variable para ir sumando los valores de la serie
 
-        // Pedir valores al usuario
-        System.out.println("Ingrese el valor de x: ");
-        x = k.nextInt();
+        int x = 0;
+        int n = 0; // Número de términos de la serie
 
-        System.out.println("Ingrese el número de terminos de la serie de Taylor: ");
-        n = k.nextInt();
+        // Pedir valores al usuario
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                System.out.println("Ingresa el valor de x: ");
+                x = k.nextInt();
+                System.out.println("Ingresa el número de términos de la sucesión: ");
+                n = k.nextInt();
+                validInput = true;
+            } catch (Exception e) {
+                System.out.println("Debes ingresar un número entero");
+                k.next(); // Limpiar el buffer del scanner
+            }
+        }
 
         // Ciclo para realizar la serie
         for (int i = 1; i < n; i++) {

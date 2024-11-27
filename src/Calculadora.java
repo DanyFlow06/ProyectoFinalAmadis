@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Calculadora {
@@ -5,7 +6,6 @@ public class Calculadora {
     public void menuCalculadora() {
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true; // Variable para controlar el ciclo del menú  
-
 
         // Ciclo para mostrar el menú de la calculadora
         while (continuar) {
@@ -17,7 +17,21 @@ public class Calculadora {
                 System.out.println("4. Exponenciación");
                 System.out.println("5. Salir");
                 System.out.println("Elige una operación:");
-                int opcion = scanner.nextInt();
+                
+                int opcion = 0;
+                boolean validInput = false;
+                while (!validInput) {
+                    try {
+                        opcion = scanner.nextInt();
+                        if (opcion < 1 || opcion > 5) {
+                            throw new IllegalArgumentException("Opción no válida, elige un rango de 1-5.");
+                        }
+                        validInput = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Debes poner solo números, intentalo de nuevo:");
+                        scanner.next(); // Limpiar el buffer del scanner
+                    }
+                }
 
                 // Validacion para salir del menú
                 if (opcion == 5) {
@@ -27,16 +41,36 @@ public class Calculadora {
                 }
 
                 System.out.println("Ingresa la cantidad de números para la operación:");
-                int n = scanner.nextInt();
-                if (n <= 0) {
-                    throw new IllegalArgumentException("La cantidad de números debe ser mayor a 0.");
+                int n = 0;
+                validInput = false;
+                while (!validInput) {
+                    try {
+                        n = scanner.nextInt();
+                        if (n <= 0) {
+                            throw new IllegalArgumentException("La cantidad de números debe ser mayor a 0.");
+                        }
+                        validInput = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Debes ingresar un número entero válido.");
+                        scanner.next(); // Limpiar el buffer del scanner
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
                 }
 
                 double[] numeros = new double[n];
-
                 for (int i = 0; i < n; i++) {
-                    System.out.print("Ingresa el número " + (i + 1) + ": ");
-                    numeros[i] = scanner.nextDouble();
+                    validInput = false;
+                    while (!validInput) {
+                        System.out.print("Ingresa el número " + (i + 1) + ": ");
+                        try {
+                            numeros[i] = scanner.nextDouble();
+                            validInput = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Debes ingresar un número válido.");
+                            scanner.next(); // Limpiar el buffer del scanner
+                        }
+                    }
                 }
 
                 switch (opcion) {
@@ -55,8 +89,6 @@ public class Calculadora {
                     default:
                         System.out.println("Opción no válida. Inténtalo de nuevo.");
                 }
-            } catch (IllegalArgumentException e) {
-                System.out.println("Error: " + e.getMessage());
             } catch (Exception e) {
                 System.out.println("Error inesperado: " + e.getMessage());
             }
