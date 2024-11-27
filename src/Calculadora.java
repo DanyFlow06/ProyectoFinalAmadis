@@ -1,6 +1,17 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/*
+ * Calculadora
+ * 
+ * Autores: Ángel Uriel Ramírez Salgado, Felix Anguiano Daniel Alberto
+ * Fecha: 27/11/2024
+ * Descripción: Esta clase contiene los métodos para realizar operaciones matemáticas básicas como suma, resta, multiplicación y división
+ * desplegando un menú para seleccionar la operación deseada simulando una calculadora.
+ *
+ * Copyrigth: OpenSource
+ */
+
 public class Calculadora {
     // Despliegue de menú de calculadora
     public void menuCalculadora() {

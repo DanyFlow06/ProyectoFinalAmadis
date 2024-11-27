@@ -2,6 +2,17 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+/*
+ * Problemas
+ * 
+ * Autores: Ángel Uriel Ramírez Salgado, Felix Anguiano Daniel Alberto
+ * Fecha: 27/11/2024
+ * Descripción: Este proyecto contiene una lista de programas en Java en total son 10.
+ * Cada programa aborda un problema específico y proporciona una solución implementada en Java.
+ *
+ * Copyrigth: OpenSource
+ */
+
 public class Problemas {
     
     public static void main(String[] args) throws Exception {
